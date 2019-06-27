@@ -61,3 +61,7 @@ TABLE_SES_NOTIFICATIONS=SESNotifications \
 SNS_TOPIC_ARN=arn:aws:sns:us-east-1:xxx:ses-messages \
 make deploy
 ```
+
+## Docs
+
+https://aws.amazon.com/premiumsupport/knowledge-center/lambda-sns-ses-dynamodb/?nc1=h_ls

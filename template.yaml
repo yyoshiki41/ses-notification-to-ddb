@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+Description: >-
+  AWS Lambda function to store Amazon SNS notification contents for Amazon SES to an Amazon DynamoDB
+Parameters:
+  TableSESNotifications:
+    Type: String
+  SNSTopicArn:
+    Type: String
+Resources:
+  SESNotification:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: >-
+        An Amazon SES notification handler for processing bounces, complaints and deliveries.
+      MemorySize: 128
+      Timeout: 10
+      Events:
+        SESNotification:
+          Type: SNS
+          Properties:
+            Topic: !Ref SNSTopicArn
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TableSESNotifications
+      Environment:
+        Variables:
+          TABLE_SES_NOTIFICATIONS: !Ref TableSESNotifications

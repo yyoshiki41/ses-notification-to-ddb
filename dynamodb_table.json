@@ -1,0 +1,27 @@
+{
+  "TableName": "SESNotifications",
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "SESMessageId",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "SnsPublishTime",
+      "AttributeType": "S"
+    }
+  ],
+  "KeySchema": [
+    {
+      "KeyType": "HASH",
+      "AttributeName": "SESMessageId"
+    },
+    {
+      "KeyType": "RANGE",
+      "AttributeName": "SnsPublishTime"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}
