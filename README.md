@@ -1,4 +1,4 @@
-# Lambda function to store notification contents for Amazon SES to an DynamoDB
+# Lambda function to store notification contents for Amazon SES to DynamoDB
 
 AWS Serverless Application: Store SES bounces, complaints and deliveries to DynamoDB
 
@@ -61,6 +61,11 @@ TABLE_SES_NOTIFICATIONS=SESNotifications \
 SNS_TOPIC_ARN=arn:aws:sns:us-east-1:xxx:ses-messages \
 make deploy
 ```
+
+## DynamoDB Schema
+
+Default schema (`dynamodb_table.json`) does not use GSI.
+Create index yourself, if you want.
 
 ## Docs
 
