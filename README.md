@@ -70,3 +70,7 @@ Create index yourself, if you want.
 ## Docs
 
 https://aws.amazon.com/premiumsupport/knowledge-center/lambda-sns-ses-dynamodb/?nc1=h_ls
+
+## Resources
+
+- [Japanese](https://qiita.com/yyoshiki41/items/a0c1f393d2b8f4d96c51)
