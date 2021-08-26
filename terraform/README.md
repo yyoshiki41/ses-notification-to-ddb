@@ -36,9 +36,13 @@ $ terraform apply
 
 ### 5. Subscribe SES to SNS
 
+Go to AWS Console - SES - Email addresses - click on one address - notifications - edit configuration  
+  
+For bounces, complaints, deliveries select the "ses-notification-to-ddb" sns topc and check "include original headers", then "save config".
+
 ## Note
 
-This terraform template is an example, if you need to deploy to production i suggest to keep a remote state on S3:
+This terraform template is an example, if you need to deploy to production i suggest to keep the terraform state on S3:
 
 ```
 terraform {
