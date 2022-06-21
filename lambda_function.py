@@ -26,12 +26,14 @@ def handle_bounce(message, sns_publish_time):
         recipient['emailAddress'] for recipient in bounced_recipients
     )
     bounce_type = message['bounce']['bounceType']
+    sender = message['mail']['source']
     item = {
             "SESMessageId": message_id,
             "SnsPublishTime": sns_publish_time,
             "SESMessageType": notification_type,
             "SESDestinationAddress": addresses,
-            "BounceType": bounce_type
+            "BounceType": bounce_type,
+            "SESSenderAddress": sender
     }
     put_item(item)
     logger.info("Message %s bounced when sending to %s. Bounce type: %s" %
@@ -47,13 +49,15 @@ def handle_complaint(message, sns_publish_time):
     )
     feedback_id = message['complaint']['feedbackId']
     feedback_type = message['complaint']['complaintFeedbackType']
+    sender = message['mail']['source']
     item = {
             "SESMessageId": message_id,
             "SnsPublishTime": sns_publish_time,
             "SESMessageType": notification_type,
             "SESDestinationAddress": addresses,
             "SESFeedbackId": feedback_id,
-            "SESComplaintFeedbackType": feedback_type
+            "SESComplaintFeedbackType": feedback_type,
+            "SESSenderAddress": sender
     }
     put_item(item)
     logger.info("A complaint was reported by %s for message %s." %
@@ -64,11 +68,13 @@ def handle_delivery(message, sns_publish_time):
     message_id = message['mail']['messageId']
     notification_type = message['notificationType']
     delivery_recipients = message['mail']['destination']
+    sender = message['mail']['source']
     item = {
             "SESMessageId": message_id,
             "SnsPublishTime": sns_publish_time,
             "SESMessageType": notification_type,
-            "SESDestinationAddress": delivery_recipients
+            "SESDestinationAddress": delivery_recipients,
+            "SESSenderAddress": sender
     }
     put_item(item)
     logger.info("Message %s was delivered successfully at %s" %
